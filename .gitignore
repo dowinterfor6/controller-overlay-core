@@ -1,5 +1,13 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# windows "node_modules" or something
+*
+!*/
+!*.*
+*.js
+*.cmd
+*.ps1
+
 # dependencies
 node_modules/
 release-builds/
