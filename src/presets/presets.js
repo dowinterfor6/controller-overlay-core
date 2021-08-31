@@ -96,7 +96,7 @@ export const presets = {
       base: "#121212",
     },
     logo: {
-      foreground: "#123066",
+      foreground: "#121212",
       background: "#fff",
     },
     topButtons: {
@@ -136,7 +136,7 @@ export const presets = {
       base: "#121212",
     },
     logo: {
-      foreground: "#6e130e",
+      foreground: "#121212",
       background: "#fff",
     },
     topButtons: {

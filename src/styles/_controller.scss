@@ -16,37 +16,33 @@ svg {
 
       &.draw {
         opacity: 1;
-
-        // &.button-text {
-        //   &.a-button {
-        //     stroke: $a-button-color;
-        //     fill: $a-button-color;
-        //   }
-
-        //   &.b-button {
-        //     stroke: $b-button-color;
-        //     fill: $b-button-color;
-        //   }
-
-        //   &.x-button {
-        //     stroke: $x-button-color;
-        //     fill: $x-button-color;
-        //   }
-
-        //   &.y-button {
-        //     stroke: $y-button-color;
-        //     fill: $y-button-color;
-        //   }
-        // }
       }
     }
   }
 
-  .test {
-    opacity: 0;
+  #xboxLogo {
+    &.no-transition {
+      cursor: pointer;
+    }
+
+    #logoBackground.no-transition {
+      opacity: 0.1;
+      transition: 0.3s opacity;
+    }
+
+    #settingsIcon {
+      display: none;
+    }
 
     &:hover {
-      animation: pulse 1s infinite;
+      & > #logoBackground.no-transition {
+        opacity: 1;
+      }
+
+      & > #settingsIcon.no-transition {
+        display: initial;
+        animation: pulse 2s infinite;
+      }
     }
   }
 }
@@ -59,14 +55,14 @@ svg {
 
 @keyframes pulse {
   0% {
-    opacity: 0;
+    opacity: 0.8;
   }
 
   50% {
-    opacity: 0.3;
+    opacity: 1;
   }
 
   100% {
-    opacity: 0;
+    opacity: 0.8;
   }
 }
