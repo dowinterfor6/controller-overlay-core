@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const ControllerSVG = ({ state, toggleSettingsMenuState }) => {
+const XboxController = ({ state, handleLogoClick }) => {
   const [hasAnimationEnded, setHasAnimationEnded] = useState(false);
   const svgRef = useRef();
 
@@ -33,10 +33,6 @@ const ControllerSVG = ({ state, toggleSettingsMenuState }) => {
       path.classList.add("draw");
     }
   }, []);
-
-  const handleLogoClick = () => {
-    toggleSettingsMenuState();
-  };
 
   // TODO: This should be configurable somewhere maybe
   const joystickOffsetCoefficient = 4;
@@ -428,4 +424,4 @@ const ControllerSVG = ({ state, toggleSettingsMenuState }) => {
   );
 };
 
-export default ControllerSVG;
+export default XboxController;

@@ -1,9 +1,15 @@
 import React, { useEffect, useReducer, useState } from "react";
-import ControllerSVG from "./components/ControllerSVG";
+import ControllerDisplay from "./components/ControllerDisplay";
 import SettingsMenu from "./components/SettingsMenu";
 import "./index.scss";
 import { presets } from "./presets/presets";
-import { BACKGROUND_COLOR_KEY, PRESET_KEY } from "./util/constants";
+import {
+  BACKGROUND_COLOR_KEY,
+  PRESET_KEY,
+  CONTROLLER_LAYOUTS,
+  CONTROLLER_LAYOUT_KEY,
+  XBOX_LAYOUT,
+} from "./util/constants";
 
 const keyMap = {
   0: { name: "A" },
@@ -44,6 +50,7 @@ const App = () => {
   const TOGGLE_SETTINGS_MENU = "TOGGLE_SETTINGS_MENU";
   const SET_BACKGROUND_COLOR = "SET_BACKGROUND_COLOR";
   const SET_CONTROLLER_COLOR_PRESET = "SET_CONTROLLER_COLOR_PRESET";
+  const SET_CONTROLLER_LAYOUT = "SET_CONTROLLER_LAYOUT";
 
   const setKeypressState = (key, data) =>
     dispatch({ type: SET_KEYPRESS, payload: { key, data } });
@@ -59,6 +66,9 @@ const App = () => {
 
   const setControllerColorPreset = (color) =>
     dispatch({ type: SET_CONTROLLER_COLOR_PRESET, payload: color });
+
+  const setControllerLayout = (layout) =>
+    dispatch({ type: SET_CONTROLLER_LAYOUT, payload: layout });
 
   const reducer = (state, { type, payload }) => {
     let nextState = Object.assign({}, state);
@@ -93,6 +103,10 @@ const App = () => {
         nextState.controllerColors = presets[payload];
         localStorage.setItem(PRESET_KEY, payload);
         return nextState;
+      case SET_CONTROLLER_LAYOUT:
+        nextState.controllerLayout = payload;
+        localStorage.setItem(CONTROLLER_LAYOUT_KEY, payload);
+        return nextState;
       default:
         console.error("You dun goofed");
         return nextState;
@@ -106,6 +120,7 @@ const App = () => {
     backgroundColor: localStorage.getItem(BACKGROUND_COLOR_KEY) ?? "#00FF00",
     controllerColors:
       presets[localStorage.getItem(PRESET_KEY)] ?? presets.black,
+    controllerLayout: localStorage.getItem(CONTROLLER_LAYOUT_KEY) ?? XBOX_LAYOUT
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -162,6 +177,7 @@ const App = () => {
     setBackgroundColor,
     toggleSettingsMenuState,
     setControllerColorPreset,
+    setControllerLayout
   };
 
   return (
@@ -169,7 +185,7 @@ const App = () => {
       className="main-container"
       style={{ background: state.backgroundColor }}
     >
-      <ControllerSVG
+      <ControllerDisplay
         state={state}
         toggleSettingsMenuState={toggleSettingsMenuState}
       />

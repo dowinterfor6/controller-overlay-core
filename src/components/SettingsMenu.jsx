@@ -1,5 +1,6 @@
 import React from "react";
 import { presets } from "../presets/presets";
+import { CONTROLLER_LAYOUTS } from "../util/constants";
 
 const SettingsMenu = ({ state, actions }) => {
   const { showSettingsMenu: show } = state;
@@ -7,6 +8,7 @@ const SettingsMenu = ({ state, actions }) => {
     setBackgroundColor,
     toggleSettingsMenuState,
     setControllerColorPreset,
+    setControllerLayout,
   } = actions;
 
   const handleColorSelect = (e) => {
@@ -21,6 +23,21 @@ const SettingsMenu = ({ state, actions }) => {
     const preset = e.currentTarget.value.toLowerCase();
     setControllerColorPreset(preset);
   };
+
+  const handleControllerLayoutChange = (e) => {
+    const layoutKey = reverseControllerLayoutObj[e.currentTarget.value];
+    setControllerLayout(layoutKey);
+  };
+
+  // TODO: There's gotta be a better way...
+  // use dataset?
+  const reverseControllerLayoutObj = {};
+
+  for (const [key, displayName] of Object.entries(CONTROLLER_LAYOUTS)) {
+    reverseControllerLayoutObj[displayName] = key;
+  }
+
+  const controllerLayoutDisplayNames = Object.keys(reverseControllerLayoutObj);
 
   const presetNames = Object.keys(presets);
 
@@ -46,17 +63,33 @@ const SettingsMenu = ({ state, actions }) => {
           </svg>
         </div>
         <h1>Settings</h1>
+        <div className="controller-layout-selector">
+          <label>
+            <h2>Controller Layout</h2>
+          </label>
+          <select
+            onChange={handleControllerLayoutChange}
+            defaultValue={CONTROLLER_LAYOUTS[state.controllerLayout]}
+          >
+            {controllerLayoutDisplayNames.map((layout, i) => (
+              <option key={i}>{layout}</option>
+            ))}
+          </select>
+        </div>
         <div className="background-selector">
+          <label>
+            <h2>Background</h2>
+          </label>
           <input
             type="color"
             onChange={handleColorSelect}
             defaultValue={state.backgroundColor}
           />
-          <label>
-            <h2>Background</h2>
-          </label>
         </div>
         <div className="theme-selector">
+          <label>
+            <h2>Theme</h2>
+          </label>
           <select
             onChange={handlePresetChange}
             defaultValue={state.controllerColors.displayName}
@@ -67,9 +100,6 @@ const SettingsMenu = ({ state, actions }) => {
               </option>
             ))}
           </select>
-          <label>
-            <h2>Theme</h2>
-          </label>
         </div>
       </section>
     </div>
