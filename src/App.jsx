@@ -9,6 +9,7 @@ import {
   CONTROLLER_LAYOUTS,
   CONTROLLER_LAYOUT_KEY,
   XBOX_LAYOUT,
+  DS4_LAYOUT,
 } from "./util/constants";
 
 const keyMap = {
@@ -120,7 +121,7 @@ const App = () => {
     backgroundColor: localStorage.getItem(BACKGROUND_COLOR_KEY) ?? "#00FF00",
     controllerColors:
       presets[localStorage.getItem(PRESET_KEY)] ?? presets.black,
-    controllerLayout: localStorage.getItem(CONTROLLER_LAYOUT_KEY) ?? XBOX_LAYOUT
+    controllerLayout: localStorage.getItem(CONTROLLER_LAYOUT_KEY) ?? DS4_LAYOUT,
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -177,7 +178,7 @@ const App = () => {
     setBackgroundColor,
     toggleSettingsMenuState,
     setControllerColorPreset,
-    setControllerLayout
+    setControllerLayout,
   };
 
   return (
