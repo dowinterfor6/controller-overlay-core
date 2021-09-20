@@ -9,7 +9,7 @@ svg {
       animation: dash 2s linear forwards;
     }
 
-    &.fade-in-path:not(.no-transition) {
+    &.fade-in-path {
       opacity: 0;
       transition: opacity 0.3s, fill 0.3s;
       transition-delay: 2s;
@@ -20,7 +20,8 @@ svg {
     }
   }
 
-  #xboxLogo {
+  #xboxLogo,
+  #ds4Logo {
     &.no-transition {
       cursor: pointer;
     }
@@ -43,6 +44,12 @@ svg {
         display: initial;
         animation: pulse 2s infinite;
       }
+    }
+  }
+
+  #ds4Buttons {
+    .button-text {
+      stroke-width: 0.5px;
     }
   }
 }
