@@ -6,9 +6,7 @@ import { presets } from "./presets/presets";
 import {
   BACKGROUND_COLOR_KEY,
   PRESET_KEY,
-  CONTROLLER_LAYOUTS,
   CONTROLLER_LAYOUT_KEY,
-  XBOX_LAYOUT,
   DS4_LAYOUT,
 } from "./util/constants";
 
